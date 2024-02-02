@@ -4,11 +4,6 @@ required_providers {
     version = "~> 5.0"
   }
 
-  hcp = {
-    source  = "hashicorp/hcp"
-    version = "~> 0.80.0"
-  }
-
   cloudinit = {
     source  = "hashicorp/cloudinit"
     version = "~> 2.0"
@@ -39,10 +34,6 @@ required_providers {
     version = "~> 2.4"
   }
 
-   consul = {
-      source = "hashicorp/consul"
-      version = "2.20.0"
-  }
 }
 
 provider "aws" "configurations" {
