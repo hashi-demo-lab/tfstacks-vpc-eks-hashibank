@@ -45,7 +45,7 @@ required_providers {
   }
 }
 
-/* provider "aws" "configurations" {
+provider "aws" "configurations" {
   for_each = var.regions
 
   config {
@@ -57,21 +57,10 @@ required_providers {
     }
   }
 }
- */
-/* provider "hcp" "configuration" {
 
-  config {
-    project_id = var.hcp_project_id
 
-    workload_identity {
-      resource_name = var.workload_idp_name
-      token_file = var.hcp_identity_token_file
-    }
-    
-  }
-} */
 
-/* provider "kubernetes" "configurations" {
+provider "kubernetes" "configurations" {
   for_each = var.regions
   config { 
     host                   = component.eks-oidc[each.value].eks_endpoint
@@ -99,17 +88,6 @@ provider "helm" "oidc_configurations" {
     }
   }
 }
- */
-/* # NEEDS TO MOVE TO OIDC
-provider "consul" "configurations" {
-  for_each = var.regions
-  config {
-    address = component.hcp-consul.public_endpoint_url
-    token = component.hcp-consul.root_token
-    datacenter = component.hcp-consul.consul_datacenter
-    scheme = "https"
-  }
-} */
 
 
 provider "cloudinit" "this" {}

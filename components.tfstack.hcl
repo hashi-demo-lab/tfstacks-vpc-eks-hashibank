@@ -1,4 +1,4 @@
-
+#AWS VPC
 component "vpc" {
   for_each = var.regions
 
@@ -14,6 +14,7 @@ component "vpc" {
   }
 } 
 
+#AWS EKS
 component "eks" {
   for_each = var.regions
 
@@ -54,7 +55,7 @@ component "eks-oidc" {
   }
 }
 
-# Create K8s Namespace
+# Update K8s role-binding
 component "k8s-identity" {
   for_each = var.regions
 
@@ -69,6 +70,7 @@ component "k8s-identity" {
     kubernetes  = provider.kubernetes.configurations[each.value]
   }
 }
+
 
 # K8s Addons
 component "k8s-addons" {
