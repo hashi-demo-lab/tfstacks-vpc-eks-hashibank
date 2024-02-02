@@ -1,0 +1,61 @@
+apiVersion: app.terraform.io/v1alpha2
+kind: Module
+metadata:
+  name: module-eks-cluster-fargate
+spec:
+  module:
+    source: github.com/hashi-demo-lab/tfc-operator-k8s//terraform-aws-eks-fargate
+  name: module-eks-cluster-fargate
+  organization: hashi-demos-apj
+  outputs:
+  - name: configure_kubectl
+  - name: cluster_name
+  - name: cluster_endpoint
+  - name: cluster_version
+  - name: oidc_provider_arn
+  - name: cluster_certificate_authority_data
+  token:
+    secretKeyRef:
+      key: token
+      name: tfc-operator
+  variables:
+  - name: region
+  - name: cluster_name
+  - name: private_subnets
+  - name: vpc_id
+  workspace:
+    name: ws-module-eks-cluster-fargate
+---
+apiVersion: app.terraform.io/v1alpha2
+kind: Workspace
+metadata:
+  name: ws-module-eks-cluster-fargate
+spec:
+  applyMethod: auto
+  description: Workspace created using k8s operator
+  executionMode: remote
+  name: ws-module-eks-cluster-fargate
+  organization: hashi-demos-apj
+  terraformVariables:
+  - hcl: false
+    name: region
+    value: ap-southeast-2
+  - hcl: false
+    name: cluster_name
+    value: eks-cluster
+  - hcl: true
+    name: private_subnets
+    valueFrom:
+      configMapKeyRef:
+        key: private_subnets
+        name: ws-module-aws-vpc-outputs
+  - hcl: false
+    name: vpc_id
+    valueFrom:
+      configMapKeyRef:
+        key: vpc_id
+        name: ws-module-aws-vpc-outputs
+  token:
+    secretKeyRef:
+      key: token
+      name: tfc-operator

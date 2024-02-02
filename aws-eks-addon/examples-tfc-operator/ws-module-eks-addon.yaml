@@ -1,0 +1,52 @@
+apiVersion: app.terraform.io/v1alpha2
+kind: Workspace
+metadata:
+  name: ws-module-eks-addon
+spec:
+  name: ws-module-eks-addon
+  organization: hashi-demos-apj # replace with your org name
+  token:
+    secretKeyRef:
+      name: tfc-operator
+      key: token
+  description: Workspace created using k8s operator
+  applyMethod: auto
+  executionMode: remote
+  terraformVariables:
+    - name: region
+      hcl: false
+      value: "ap-southeast-2"
+    - name: cluster_name
+      hcl: false
+      valueFrom:
+        configMapKeyRef:
+          name: ws-module-eks-cluster-fargate-outputs #ConfigMap with EKS workspace outputs
+          key: cluster_name # EKS Cluster Name
+    - name: vpc_id
+      hcl: false
+      valueFrom:
+        configMapKeyRef:
+          name: ws-module-aws-vpc-outputs #ConfigMap with VPC workspace outputs
+          key: vpc_id # VPC workspace output for VPC id
+    - name: cluster_endpoint
+      hcl: false
+      valueFrom:
+        configMapKeyRef:
+          name: ws-module-eks-cluster-fargate-outputs #ConfigMap with EKS workspace outputs
+          key: cluster_endpoint # EKS cluster_endpoint
+    - name: cluster_version
+      hcl: false
+      valueFrom:
+        configMapKeyRef:
+          name: ws-module-eks-cluster-fargate-outputs #ConfigMap with EKS workspace outputs
+          key: cluster_version # EKS K8s version
+    - name: oidc_provider_arn
+      valueFrom:
+        configMapKeyRef:
+          name: ws-module-eks-cluster-fargate-outputs #ConfigMap with EKS workspace outputs
+          key: oidc_provider_arn # EKS OIDC Arn
+    - name: cluster_certificate_authority_data
+      valueFrom:
+        configMapKeyRef:
+          name: ws-module-eks-cluster-fargate-outputs #ConfigMap with EKS workspace outputs
+          key: cluster_certificate_authority_data # EKS Cluster certificate

@@ -1,0 +1,33 @@
+apiVersion: app.terraform.io/v1alpha2
+kind: Workspace
+metadata:
+  name: ws-module-eks-cluster-fargate
+spec:
+  name: ws-module-eks-cluster-fargate
+  organization: hashi-demos-apj # replace with your org name
+  token:
+    secretKeyRef:
+      name: tfc-operator
+      key: token
+  description: Workspace created using k8s operator
+  applyMethod: auto
+  executionMode: remote
+  terraformVariables:
+    - name: region
+      hcl: false
+      value: "ap-southeast-2"
+    - name: cluster_name
+      hcl: false
+      value: "eks-cluster"
+    - name: private_subnets
+      hcl: true
+      valueFrom:
+        configMapKeyRef:
+          name: ws-module-aws-vpc-outputs #ConfigMap with VPC workspace outputs
+          key: private_subnets # VPC workspace outputn with list of private subnets
+    - name: vpc_id
+      hcl: false
+      valueFrom:
+        configMapKeyRef:
+          name: ws-module-aws-vpc-outputs #ConfigMap with VPC workspace outputs
+          key: vpc_id # VPC workspace output for VPC id
