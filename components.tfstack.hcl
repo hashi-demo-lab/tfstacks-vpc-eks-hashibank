@@ -117,15 +117,10 @@ component "deploy-hashibank" {
   source = "./hashibank-deploy"
 
   inputs = {
-    hashicups_namspace= var.hashicups_namspace
-    ingress_public_fqdn = component.consul-deploy[each.value].ingress_public_fqdn
-
+    hashicups_namspace = component.k8s-namespace[each.value].namespace
   }
 
   providers = {
     kubernetes  = provider.kubernetes.oidc_configurations[each.value]
-    consul = provider.consul.configurations[each.value]
-    time = provider.time.this
-    local = provider.local.this
   }
 }

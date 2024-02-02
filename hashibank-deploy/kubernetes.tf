@@ -38,7 +38,7 @@ resource "kubernetes_deployment" "hashibank" {
                 cpu    = "200m"
                 memory = "256Mi"
                 }
-                
+
                 requests = {
                 cpu    = "100m"
                 memory = "128Mi"
@@ -58,7 +58,7 @@ resource "kubernetes_deployment" "hashibank" {
 resource "kubernetes_service_v1" "hashibank" {
   metadata {
     name      = "hashibank"
-    namespace = "hashibank"
+    namespace = var.hashibank_namespace
   }
 
   spec {

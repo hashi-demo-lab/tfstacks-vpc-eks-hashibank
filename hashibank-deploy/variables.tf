@@ -1,5 +1,5 @@
-variable "deployment_name" {
-  description = "Deployment name, used to prefix resources"
+variable "hashibank_namespace" {
+  description = "hashibank namespace"
   type        = string
 }
 
