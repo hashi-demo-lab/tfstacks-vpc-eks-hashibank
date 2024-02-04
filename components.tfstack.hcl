@@ -38,16 +38,13 @@ component "eks" {
 }
 
 # AWS EKS OIDC pre-reqs
-component "eks-oidc" {
+component "eks-auth" {
   for_each = var.regions
 
-  source = "./aws-eks-oidc"
+  source = "./aws-eks-auth"
 
   inputs = {
-    cluster_name = component.eks[each.value].cluster_name
-    tfc_kubernetes_audience = var.tfc_kubernetes_audience
-    tfc_hostname = var.tfc_hostname
-    
+    cluster_name = component.eks[each.value].cluster_name  
   }
 
   providers = {
@@ -56,13 +53,13 @@ component "eks-oidc" {
 }
 
 # Update K8s role-binding
-component "k8s-identity" {
+component "k8s-rbac" {
   for_each = var.regions
 
-  source = "./k8s-oidc"
+  source = "./k8s-rbac"
 
   inputs = {
-    cluster_namespace = component.eks-oidc[each.value].cluster_name
+    cluster_namespace = component.eks-auth[each.value].cluster_name
     tfc_organization_name = var.tfc_organization_name
   }
 
@@ -79,10 +76,10 @@ component "k8s-addons" {
   source = "./aws-eks-addon"
 
   inputs = {
-    cluster_name = component.eks-oidc[each.value].cluster_name
+    cluster_name = component.eks-auth[each.value].cluster_name
     vpc_id = component.vpc[each.value].vpc_id
     private_subnets = component.vpc[each.value].private_subnets
-    cluster_endpoint = component.eks-oidc[each.value].eks_endpoint
+    cluster_endpoint = component.eks[each.value].cluster_endpoint
     cluster_version = component.eks[each.value].cluster_version
     oidc_provider_arn = component.eks[each.value].oidc_provider_arn
     cluster_certificate_authority_data = component.eks[each.value].cluster_certificate_authority_data   
