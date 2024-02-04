@@ -102,7 +102,7 @@ component "k8s-namespace" {
 
   inputs = {
     namespace = var.namespace
-    labels = component.k8s-addons[each.value].labels
+    labels = component.k8s-addons[each.value].eks_addons
   }
 
   providers = {
@@ -117,7 +117,7 @@ component "deploy-hashibank" {
   source = "./hashibank-deploy"
 
   inputs = {
-    hashicups_namspace = component.k8s-namespace[each.value].namespace
+    hashibank_namspace = component.k8s-namespace[each.value].namespace
   }
 
   providers = {
