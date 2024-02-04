@@ -26,6 +26,8 @@ component "eks" {
     kubernetes_version = var.kubernetes_version
     cluster_name = var.cluster_name
     manage_aws_auth_configmap = var.manage_aws_auth_configmap
+    tfc_hostname = var.tfc_hostname
+    tfc_kubernetes_audience = var.tfc_kubernetes_audience
   }
 
   providers = {
