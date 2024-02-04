@@ -117,7 +117,7 @@ component "deploy-hashibank" {
   source = "./hashibank-deploy"
 
   inputs = {
-    hashibank_namspace = component.k8s-namespace[each.value].namespace
+    hashibank_namespace = component.k8s-namespace[each.value].namespace
   }
 
   providers = {
