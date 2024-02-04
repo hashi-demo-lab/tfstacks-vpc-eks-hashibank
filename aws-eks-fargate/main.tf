@@ -76,3 +76,14 @@ module "eks" {
 
 
 }
+
+data "aws_eks_cluster" "upstream" {
+  depends_on = [module.eks]
+  name = var.cluster_name
+
+}
+
+data "aws_eks_cluster_auth" "upstream_auth" {
+  depends_on = [module.eks]
+  name = var.cluster_name
+}

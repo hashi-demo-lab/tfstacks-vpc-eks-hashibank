@@ -39,7 +39,7 @@ component "eks" {
   }
 }
 
-# AWS EKS OIDC pre-reqs
+/* # AWS EKS OIDC pre-reqs
 component "eks-auth" {
   for_each = var.regions
 
@@ -53,7 +53,7 @@ component "eks-auth" {
   providers = {
     aws    = provider.aws.configurations[each.value]
   }
-}
+} */
 
 # Update K8s role-binding
 component "k8s-rbac" {
@@ -62,7 +62,7 @@ component "k8s-rbac" {
   source = "./k8s-rbac"
 
   inputs = {
-    cluster_namespace = component.eks-auth[each.value].cluster_name
+    cluster_endpoint = component.eks[each.value].cluster_endpoint
     tfc_organization_name = var.tfc_organization_name
   }
 
@@ -79,7 +79,7 @@ component "k8s-addons" {
   source = "./aws-eks-addon"
 
   inputs = {
-    cluster_name = component.eks-auth[each.value].cluster_name
+    cluster_name = component.eks[each.value].cluster_name
     vpc_id = component.vpc[each.value].vpc_id
     private_subnets = component.vpc[each.value].private_subnets
     cluster_endpoint = component.eks[each.value].cluster_endpoint
