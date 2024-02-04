@@ -2,6 +2,7 @@
 resource "kubernetes_deployment" "hashibank" {
   metadata {
     name = "hashibank"
+    namespace = var.hashibank_namespace
   }
 
   spec {
