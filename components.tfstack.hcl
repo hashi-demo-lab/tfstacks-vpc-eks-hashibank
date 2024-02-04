@@ -102,7 +102,6 @@ component "k8s-namespace" {
 
   inputs = {
     namespace = var.namespace
-    tfc_organization_name = var.tfc_organization_name
     labels = component.k8s-addons[each.value].labels
   }
 

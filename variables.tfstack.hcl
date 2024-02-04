@@ -58,6 +58,7 @@ variable "cluster_name" {
 
 variable "namespace" {
   type = string
+  default = "hashibank"
 }
 
 variable "tfc_hostname" {
