@@ -5,7 +5,6 @@ variable "vpc_id" {
 
 variable "cluster_name" {
   type    = string
-  default = "eks-cluster"
 }
 
 variable "cluster_endpoint" {
