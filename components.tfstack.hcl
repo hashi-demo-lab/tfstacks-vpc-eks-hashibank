@@ -69,7 +69,7 @@ component "k8s-rbac" {
 }
 
 
-# K8s Addons
+# K8s Addons - aws load balancer controller, coredns, vpc-cni, kube-proxy
 component "k8s-addons" {
   for_each = var.regions
 
@@ -82,7 +82,8 @@ component "k8s-addons" {
     cluster_endpoint = component.eks[each.value].cluster_endpoint
     cluster_version = component.eks[each.value].cluster_version
     oidc_provider_arn = component.eks[each.value].oidc_provider_arn
-    cluster_certificate_authority_data = component.eks[each.value].cluster_certificate_authority_data   
+    cluster_certificate_authority_data = component.eks[each.value].cluster_certificate_authority_data
+    oidc_binding_id = component.k8s-rbac[each.value].oidc_binding_id
   }
 
   providers = {
@@ -102,6 +103,7 @@ component "k8s-namespace" {
   inputs = {
     namespace = var.namespace
     tfc_organization_name = var.tfc_organization_name
+    labels = component.k8s-addons[each.value].labels
   }
 
   providers = {
