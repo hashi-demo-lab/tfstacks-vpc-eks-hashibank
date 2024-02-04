@@ -63,15 +63,12 @@ variable "namespace" {
 
 variable "tfc_hostname" {
   type = string
-  default = "https://app.terraform.io"
 }
 
 variable "tfc_organization_name" {
   type = string
-  default = "hashi-demos-apj"
 }
 
 variable "tfc_kubernetes_audience" {
   type = string
-  default = "k8s.workload.identity"
 }
