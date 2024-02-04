@@ -81,6 +81,7 @@ resource "kubernetes_service_v1" "hashibank" {
 resource "kubernetes_ingress_v1" "hashibank" {
   metadata {
     name        = "hashibank"
+    namespace = var.hashibank_namespace
     annotations = {
       "kubernetes.io/ingress.class"             = "alb"
       "alb.ingress.kubernetes.io/scheme"        = "internet-facing"
