@@ -23,3 +23,12 @@ variable "manage_aws_auth_configmap" {
   type    = bool
   default = false
 }
+
+variable "tfc_hostname" {
+  type    = string
+  default = "https://app.terraform.io"
+}
+
+variable "tfc_kubernetes_audience" {
+  type    = string
+}

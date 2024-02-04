@@ -53,23 +53,23 @@ module "eks" {
     }
   }
 
-access_entries = {
-    # One access entry with a policy associated
-    ex-single = {
-      kubernetes_groups = []
-      principal_arn     = "arn:aws:iam::855831148133:role/aws_simon.lynch_test-developer"
-      username          = "aws_simon.lynch_test-developer"
+  access_entries = {
+      # One access entry with a policy associated
+      single = {
+        kubernetes_groups = []
+        principal_arn     = "arn:aws:iam::855831148133:role/aws_simon.lynch_test-developer"
+        username          = "aws_simon.lynch_test-developer"
 
-      policy_associations = {
-        single = {
-          policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
-          access_scope = {
-            type       = "cluster"
+        policy_associations = {
+          single = {
+            policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+            access_scope = {
+              type       = "cluster"
+            }
           }
         }
       }
     }
-  }
 
 
   tags = local.tags
