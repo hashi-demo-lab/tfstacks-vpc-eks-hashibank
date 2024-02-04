@@ -39,22 +39,6 @@ component "eks" {
   }
 }
 
-/* # AWS EKS OIDC pre-reqs
-component "eks-auth" {
-  for_each = var.regions
-
-  source = "./aws-eks-auth"
-
-  inputs = {
-    cluster_name = component.eks[each.value].cluster_name
-    cluster_endpoint = component.eks[each.value].cluster_endpoint
-  }
-
-  providers = {
-    aws    = provider.aws.configurations[each.value]
-  }
-} */
-
 # Update K8s role-binding
 component "k8s-rbac" {
   for_each = var.regions
