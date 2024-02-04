@@ -1,20 +1,7 @@
 {
-	"folders": [
-		{
-			"path": "."
-		},
-		{
-			"path": "../tfc-operator-k8s"
-		},
-		{
-			"path": "../tfstacks-vault-consul-demo"
-		},
-		{
-			"path": "../dev-eks"
-		},
-		{
-			"path": "../terraform-aws-eks"
-		}
-	],
-	"settings": {}
+    "folders": [
+        {
+            "path": "."
+        }
+    ]
 }
