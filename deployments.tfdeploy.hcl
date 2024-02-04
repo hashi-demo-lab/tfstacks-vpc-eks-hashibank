@@ -15,7 +15,7 @@ deployment "development" {
     vpc_name = "eks-vpc-dev"
     vpc_cidr = "10.0.0.0/16"
     kubernetes_version = "1.28"
-    cluster_name = "eks-cluster"
+    cluster_name = "eks-cluster-dev"
     manage_aws_auth_configmap = false
     
     #EKS OIDC
