@@ -25,7 +25,6 @@ component "eks" {
     private_subnets = component.vpc[each.value].private_subnets
     kubernetes_version = var.kubernetes_version
     cluster_name = var.cluster_name
-    manage_aws_auth_configmap = var.manage_aws_auth_configmap
     tfc_hostname = var.tfc_hostname
     tfc_kubernetes_audience = var.tfc_kubernetes_audience
     eks_clusteradmin_arn = var.eks_clusteradmin_arn
@@ -111,5 +110,6 @@ component "deploy-hashibank" {
 
   providers = {
     kubernetes  = provider.kubernetes.oidc_configurations[each.value]
+    time = provider.time.this
   }
 }
