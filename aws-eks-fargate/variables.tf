@@ -19,10 +19,6 @@ variable "vpc_id" {
 variable "kubernetes_version" {
   type    = string
 }
-variable "manage_aws_auth_configmap" {
-  type    = bool
-  default = false
-}
 
 variable "tfc_hostname" {
   type    = string

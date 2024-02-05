@@ -16,7 +16,6 @@ deployment "development" {
     vpc_cidr = "10.0.0.0/16"
     kubernetes_version = "1.28"
     cluster_name = "eks-cluster"
-    manage_aws_auth_configmap = false
     
     #EKS OIDC
     tfc_kubernetes_audience = "k8s.workload.identity"

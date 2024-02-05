@@ -24,11 +24,6 @@ variable "aws_auth_roles" {
   default = []
 }
 
-variable "manage_aws_auth_configmap" {
-  type    = bool
-  default = false
-}
-
 variable "role_arn" {
   type = string
 }
