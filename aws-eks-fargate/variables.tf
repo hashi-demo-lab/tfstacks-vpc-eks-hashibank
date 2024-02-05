@@ -36,8 +36,3 @@ variable "eks_clusteradmin_arn" {
 variable "eks_clusteradmin_username" {
   type    = string
 }
-
-variable "enable_irsa" {
-  type    = bool
-  default = false
-}

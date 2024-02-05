@@ -17,7 +17,7 @@ module "eks" {
   vpc_id     = var.vpc_id
   subnet_ids = var.private_subnets
 
-  enable_irsa = var.enable_irsa
+  enable_irsa = true
 
   # Fargate profiles use the cluster primary security group so these are not utilized
   create_cluster_security_group = false
