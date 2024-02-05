@@ -50,6 +50,7 @@ resource "kubernetes_deployment" "hashibank" {
       }
     }
   }
+  wait_for_rollout = false
 }
 
 resource "time_sleep" "wait_60_seconds" {
@@ -61,6 +62,8 @@ resource "time_sleep" "wait_60_seconds" {
 
 #hashibank ingress
 resource "kubernetes_ingress_v1" "hashibank" {
+  depends_on = [time_sleep.wait_60_seconds]
+  wait_for_load_balancer = false
   metadata {
     name        = "hashibank"
     namespace = var.hashibank_namespace
@@ -98,7 +101,7 @@ resource "kubernetes_ingress_v1" "hashibank" {
 # hashibank service
 resource "kubernetes_service_v1" "hashibank" {
   depends_on = [time_sleep.wait_60_seconds]
-  wait_for_load_balancer = true
+  wait_for_load_balancer = false
   metadata {
     name      = "hashibank"
     namespace = var.hashibank_namespace
