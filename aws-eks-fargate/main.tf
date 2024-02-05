@@ -43,15 +43,7 @@ module "eks" {
     }
   }
 
-  cluster_identity_providers = {
-    tfstacks_oidc = {
-      identity_provider_config_name = "tfstack-terraform-cloud"
-      client_id                     = var.tfc_kubernetes_audience
-      issuer_url                    = var.tfc_hostname
-      username_claim                = "sub"
-      groups_claim                  = "terraform_organization_name"
-    }
-  }
+ 
 
   enable_cluster_creator_admin_permissions = true
 
@@ -59,8 +51,8 @@ module "eks" {
       # One access entry with a policy associated
       single = {
         kubernetes_groups = []
-        principal_arn     = "arn:aws:iam::855831148133:role/aws_simon.lynch_test-developer"
-        username          = "aws_simon.lynch_test-developer"
+        principal_arn     = var.eks_clusteradmin_arn
+        username          = var.eks_clusteradmin_username
 
         policy_associations = {
           single = {
@@ -89,3 +81,18 @@ data "aws_eks_cluster_auth" "upstream_auth" {
   depends_on = [module.eks]
   name = var.cluster_name
 }
+
+
+resource "aws_eks_identity_provider_config" "oidc_config" {
+  depends_on = [module.eks]
+  cluster_name = var.cluster_name
+
+  oidc {
+    identity_provider_config_name = "tfstack-terraform-cloud"
+    client_id                     = var.tfc_kubernetes_audience
+    issuer_url                    = var.tfc_hostname
+    username_claim                = "sub"
+    groups_claim                  = "terraform_organization_name"
+  }
+}
+

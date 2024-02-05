@@ -32,3 +32,13 @@ variable "tfc_hostname" {
 variable "tfc_kubernetes_audience" {
   type    = string
 }
+
+variable "eks_clusteradmin_arn" {
+  type    = string
+  default = "arn:aws:iam::855831148133:role/aws_simon.lynch_test-developer"
+}
+
+variable "eks_clusteradmin_username" {
+  type    = string
+  default = "aws_simon.lynch_test-developer"
+}

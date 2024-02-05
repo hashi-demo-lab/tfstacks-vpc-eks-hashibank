@@ -72,3 +72,10 @@ variable "tfc_organization_name" {
 variable "tfc_kubernetes_audience" {
   type = string
 }
+variable "eks_clusteradmin_arn" {
+  type = string
+}
+
+variable "eks_clusteradmin_username" {
+  type = string
+}
