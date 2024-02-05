@@ -79,3 +79,4 @@ variable "eks_clusteradmin_arn" {
 variable "eks_clusteradmin_username" {
   type = string
 }
+

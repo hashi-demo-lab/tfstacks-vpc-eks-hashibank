@@ -29,7 +29,7 @@ component "eks" {
     tfc_hostname = var.tfc_hostname
     tfc_kubernetes_audience = var.tfc_kubernetes_audience
     eks_clusteradmin_arn = var.eks_clusteradmin_arn
-    eks_cluster_username = var.eks_cluster_username
+    eks_clusteradmin_username = var.eks_cluster_username
   }
 
   providers = {
