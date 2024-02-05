@@ -53,6 +53,12 @@ resource "kubernetes_deployment" "hashibank" {
 }
 
 
+resource "time_sleep" "wait_30_seconds" {
+  depends_on = [kubernetes_deployment.hashibank]
+
+  create_duration = "30s"
+  # allow for ingress controller to be ready
+}
 
 
 # hashibank service
@@ -79,6 +85,7 @@ resource "kubernetes_service_v1" "hashibank" {
 
 #hashibank ingress
 resource "kubernetes_ingress_v1" "hashibank" {
+  depends_on = [time_sleep.wait_30_seconds]
   metadata {
     name        = "hashibank"
     namespace = var.hashibank_namespace
