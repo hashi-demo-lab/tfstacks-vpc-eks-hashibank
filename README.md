@@ -1,6 +1,6 @@
 # tfstacks-vpc-eks-hashibank
 
-* Pre-requisites
+## Pre-requisites
 
 For pre-requisite AWS OIDC configuration see: 
 
