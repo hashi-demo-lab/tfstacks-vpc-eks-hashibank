@@ -1,6 +1,6 @@
 # tfstacks-vpc-eks-hashibank
 
-![image](./img.jgp)
+![image](./img.jpg)
 
 For pre-requisite AWS OIDC configuration see: 
 
