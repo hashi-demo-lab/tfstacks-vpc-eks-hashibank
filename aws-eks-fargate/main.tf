@@ -84,7 +84,7 @@ data "aws_eks_cluster_auth" "upstream_auth" {
 
 
 resource "aws_eks_identity_provider_config" "oidc_config" {
-  depends_on = [module.eks]
+  depends_on = [module.eks.fargate_profiles]
   cluster_name = var.cluster_name
 
   oidc {
