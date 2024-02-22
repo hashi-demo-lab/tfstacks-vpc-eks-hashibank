@@ -15,7 +15,7 @@ deployment "development" {
     vpc_name = "eks-vpc"
     vpc_cidr = "10.0.0.0/16"
     kubernetes_version = "1.28"
-    cluster_name = "eks-cluster-dev4ß"
+    cluster_name = "eks-cluster-dev4"
     
     #EKS OIDC
     tfc_kubernetes_audience = "k8s.workload.identity"
