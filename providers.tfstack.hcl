@@ -51,12 +51,25 @@ provider "aws" "configurations" {
 
 
 
-provider "kubernetes" "configurations" {
+/* provider "kubernetes" "configurations" {
   for_each = var.regions
   config { 
     host                   = component.eks[each.value].cluster_endpoint
     cluster_ca_certificate = base64decode(component.eks[each.value].cluster_certificate_authority_data)
     token   = component.eks[each.value].eks_token
+  }
+} */
+
+provider "kubernetes" "configurations"  {
+  for_each = var.regions
+  config {
+  host                   = component.eks[each.value].cluster_endpoint
+  cluster_ca_certificate = base64decode(component.eks[each.value].cluster_certificate_authority_data)
+    exec {
+      api_version = "client.authentication.k8s.io/v1beta1"
+      args        = ["--web-identity-token", file(var.k8s_identity_token_file), "eks", "get-token", "--cluster-name", var.cluster_name]
+      command     = "aws"
+    }
   }
 }
 
