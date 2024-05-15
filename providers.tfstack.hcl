@@ -99,5 +99,3 @@ provider "kubernetes" "this" {}
 provider "time" "this" {}
 provider "tls" "this" {}
 provider "local" "this" {}
-
-required_version = "~1.8.3"
