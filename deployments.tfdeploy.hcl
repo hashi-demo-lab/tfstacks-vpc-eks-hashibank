@@ -10,11 +10,13 @@ identity_token "k8s" {
 deployment "development" {
   variables = {
     aws_identity_token_file = identity_token.aws.jwt_filename
-    regions             = "ap-southeast-2"
     role_arn            = "arn:aws:iam::855831148133:role/tfstacks-role"
+    regions             = "ap-southeast-2"
     vpc_name = "eks-vpc-3"
     vpc_cidr = "10.0.0.0/16"
-    kubernetes_version = "1.28"
+
+    #EKS Cluster
+    kubernetes_version = "1.29"
     cluster_name = "eks-cluster-3"
     
     #EKS OIDC
