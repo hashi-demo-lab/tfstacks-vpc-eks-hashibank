@@ -41,11 +41,6 @@ variable "kubernetes_version" {
   default = "1.28"
 }
 
-
-variable "aws_vpc_cidr" {
-  type = string
-}
-
 variable "cluster_name" {
   type = string
   default = "eks-cluster"
