@@ -52,7 +52,7 @@ provider "aws" "configurations" {
 
 
 provider "kubernetes" "configurations" {
-  for_each = var.regions
+  #for_each = var.regions
   config { 
     host                   = component.eks.cluster_endpoint
     cluster_ca_certificate = base64decode(component.eks.cluster_certificate_authority_data)
