@@ -51,16 +51,16 @@ provider "aws" "configurations" {
 
 
 
-/* provider "kubernetes" "configurations" {
+provider "kubernetes" "configurations" {
   #for_each = var.regions
   config { 
     host                   = component.eks.cluster_endpoint
     cluster_ca_certificate = base64decode(component.eks.cluster_certificate_authority_data)
     token   = component.eks.eks_token
   }
-} */
+}
 
-provider "kubernetes" "configurations"  {
+/* provider "kubernetes" "configurations"  {
   #for_each = var.regions
   config {
   host                   = component.eks.cluster_endpoint
@@ -72,7 +72,7 @@ provider "kubernetes" "configurations"  {
     }
   }
 }
-
+ */
 provider "kubernetes" "oidc_configurations" {
   #for_each = var.regions
   config { 
