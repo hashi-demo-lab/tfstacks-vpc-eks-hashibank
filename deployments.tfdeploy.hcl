@@ -11,7 +11,7 @@ deployment "development" {
   variables = {
     aws_identity_token_file = identity_token.aws.jwt_filename
     role_arn            = "arn:aws:iam::855831148133:role/tfstacks-role"
-    regions             = "ap-southeast-2"
+    regions             = ["ap-southeast-2"]
     vpc_name = "eks-vpc-3"
     vpc_cidr = "10.0.0.0/16"
 
@@ -37,7 +37,7 @@ deployment "prod" {
   variables = {
     aws_identity_token_file = identity_token.aws.jwt_filename
     role_arn            = "arn:aws:iam::855831148133:role/tfstacks-role"
-    regions             = "ap-southeast-2"
+    regions             = ["ap-southeast-2"]
     vpc_name = "eks-vpc-prod"
     vpc_cidr = "10.20.0.0/16"
 

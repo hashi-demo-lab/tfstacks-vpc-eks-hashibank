@@ -1,5 +1,5 @@
 variable "regions" {
-  type = string
+  type = set(string)
 }
 
 variable "aws_identity_token_file" {
@@ -38,7 +38,7 @@ variable "vpc_cidr" {
 
 variable "kubernetes_version" {
   type = string
-  default = "1.28"
+  default = "1.29"
 }
 
 variable "cluster_name" {
