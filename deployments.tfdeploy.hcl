@@ -33,7 +33,7 @@ deployment "development" {
   }
 }
 
-deployment "prod" {
+/* deployment "prod" {
   variables = {
     aws_identity_token_file = identity_token.aws.jwt_filename
     role_arn            = "arn:aws:iam::855831148133:role/tfstacks-role"
@@ -56,5 +56,7 @@ deployment "prod" {
     k8s_identity_token_file = identity_token.k8s.jwt_filename
     namespace = "hashibank"
 
-  }
-}
+
+  } 
+
+}*/
