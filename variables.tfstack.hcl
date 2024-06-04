@@ -1,5 +1,5 @@
 variable "regions" {
-  type = set(string)
+  type = string
 }
 
 variable "aws_identity_token_file" {

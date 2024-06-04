@@ -37,10 +37,10 @@ required_providers {
 }
 
 provider "aws" "configurations" {
-  for_each = var.regions
+  #for_each = var.regions
 
   config {
-    region = each.value
+    region = var.regions
 
     assume_role_with_web_identity {
       role_arn                = var.role_arn
@@ -52,42 +52,42 @@ provider "aws" "configurations" {
 
 
 provider "kubernetes" "configurations" {
-  for_each = var.regions
+  #for_each = var.regions
   config { 
-    host                   = component.eks[each.value].cluster_endpoint
-    cluster_ca_certificate = base64decode(component.eks[each.value].cluster_certificate_authority_data)
-    token   = component.eks[each.value].eks_token
+    host                   = component.eks.cluster_endpoint
+    cluster_ca_certificate = base64decode(component.eks.cluster_certificate_authority_data)
+    token   = component.eks.eks_token
   }
 }
 
 /* provider "kubernetes" "configurations"  {
-  for_each = var.regions
+  #for_each = var.regions
   config {
-  host                   = component.eks[each.value].cluster_endpoint
-  cluster_ca_certificate = base64decode(component.eks[each.value].cluster_certificate_authority_data)
+  host                   = component.eks.cluster_endpoint
+  cluster_ca_certificate = base64decode(component.eks.cluster_certificate_authority_data)
     exec {
       api_version = "client.authentication.k8s.io/v1beta1"
-      args        = ["sts", "AssumeRoleWithWebIdentity", "--web-identity-token", file(var.k8s_identity_token_file), "--role-arn", var.role_arn,":", "aws", "eks", "get-token", "--cluster-name", var.cluster_name, "--role-arn", var.role_arn]
+      args        = ["sts", "AssumeRoleWithWebIdentity", "--web-identity-token", file(var.aws_identity_token_file), "--role-arn", var.role_arn,":", "aws", "eks", "get-token", "--cluster-name", var.cluster_name, "--role-arn", var.role_arn]
       command     = "aws"
     }
   }
 }
  */
 provider "kubernetes" "oidc_configurations" {
-  for_each = var.regions
+  #for_each = var.regions
   config { 
-    host                   = component.eks[each.value].cluster_endpoint
-    cluster_ca_certificate = base64decode(component.eks[each.value].cluster_certificate_authority_data)
+    host                   = component.eks.cluster_endpoint
+    cluster_ca_certificate = base64decode(component.eks.cluster_certificate_authority_data)
     token   = file(var.k8s_identity_token_file)
   }
 }
 
 provider "helm" "oidc_configurations" {
-  for_each = var.regions
+  #for_each = var.regions
   config {
     kubernetes {
-      host                   = component.eks[each.value].cluster_endpoint
-      cluster_ca_certificate = base64decode(component.eks[each.value].cluster_certificate_authority_data)
+      host                   = component.eks.cluster_endpoint
+      cluster_ca_certificate = base64decode(component.eks.cluster_certificate_authority_data)
       token   = file(var.k8s_identity_token_file)
     }
   }
