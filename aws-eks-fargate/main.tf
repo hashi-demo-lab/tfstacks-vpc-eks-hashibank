@@ -42,7 +42,14 @@ module "eks" {
       ]
     }
   }
-
+  
+  fargate_profile_defaults = {
+    timeouts = {
+      create = "30m"
+      update = "30m"
+      delete = "30m"
+    }
+  }
  
 
   enable_cluster_creator_admin_permissions = true
