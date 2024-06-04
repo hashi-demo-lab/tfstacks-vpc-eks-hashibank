@@ -29,6 +29,6 @@ output "cluster_certificate_authority_data" {
 }
 
 output "eks_token" {
-  value = nonesensitive(data.aws_eks_cluster_auth.upstream_auth.token)
+  value = nonsensitive(data.aws_eks_cluster_auth.upstream_auth.token)
   sensitive = false
 }
