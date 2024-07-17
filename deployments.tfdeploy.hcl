@@ -8,7 +8,7 @@ identity_token "k8s" {
 
 
 deployment "development" {
-  variables = {
+  inputs = {
     aws_identity_token_file = identity_token.aws.jwt_filename
     role_arn            = "arn:aws:iam::855831148133:role/tfstacks-role"
     regions             = "ap-southeast-2"
@@ -34,7 +34,7 @@ deployment "development" {
 }
 
 deployment "prod" {
-  variables = {
+  inputs = {
     aws_identity_token_file = identity_token.aws.jwt_filename
     role_arn            = "arn:aws:iam::855831148133:role/tfstacks-role"
     regions             = "ap-southeast-2"
