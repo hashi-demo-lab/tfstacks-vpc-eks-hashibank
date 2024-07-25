@@ -1,7 +1,3 @@
-terraform {
-  experiments = [ unknown_instances ]
-}
-
 locals {
   tags = {
     Blueprint  = var.cluster_name

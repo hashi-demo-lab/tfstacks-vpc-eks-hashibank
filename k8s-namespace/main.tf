@@ -1,7 +1,3 @@
-terraform {
-  experiments = [ unknown_instances ]
-}
-
 resource "kubernetes_namespace_v1" "example" {
   metadata {
     annotations = {

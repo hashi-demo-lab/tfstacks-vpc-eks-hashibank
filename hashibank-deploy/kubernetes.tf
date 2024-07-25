@@ -1,6 +1,3 @@
-terraform {
-  experiments = [ unknown_instances ]
-}
 # hashibank deployment
 resource "kubernetes_deployment" "hashibank" {
   metadata {
