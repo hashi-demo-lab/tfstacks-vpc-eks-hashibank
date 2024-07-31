@@ -16,7 +16,7 @@ deployment "development" {
     vpc_cidr = "10.0.0.0/16"
 
     #EKS Cluster
-    kubernetes_version = "1.29"
+    kubernetes_version = "1.30"
     cluster_name = "eks-cluster-3"
     
     #EKS OIDC
@@ -42,7 +42,7 @@ deployment "prod" {
     vpc_cidr = "10.20.0.0/16"
 
     #EKS Cluster
-    kubernetes_version = "1.29"
+    kubernetes_version = "1.30"
     cluster_name = "eks-cluster-3-prod"
     
     #EKS OIDC
