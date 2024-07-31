@@ -67,6 +67,7 @@ module "eks_blueprints_addons" {
 
   enable_aws_load_balancer_controller = true
   aws_load_balancer_controller = {
+    most_recent = true
     set = [
       {
         name  = "vpcId"
