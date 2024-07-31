@@ -18,8 +18,31 @@ module "eks_blueprints_addons" {
   #create_delay_dependencies = [for prof in module.eks.fargate_profiles : prof.fargate_profile_arn]
 
   # EKS Add-ons
+ eks_addons = {
+    aws-ebs-csi-driver = {
+      most_recent = true
+    }
+    vpc-cni = {
+      most_recent = true
+    }
+    kube-proxy = {
+      most_recent = true
+    }
+    coredns = {
+      most_recent = true
+
+      timeouts = {
+        create = "25m"
+        delete = "10m"
+      }
+    }
+  }
+
+
+
   eks_addons = {
     coredns = {
+      most_recent = true
       configuration_values = jsonencode({
         computeType = "Fargate"
         # Ensure that the we fully utilize the minimum amount of resources that are supplied by
@@ -43,9 +66,22 @@ module "eks_blueprints_addons" {
           }
         }
       })
+
+      timeouts = {
+        create = "25m"
+        delete = "10m"
+      }
+
     }
-    vpc-cni    = {}
-    kube-proxy = {}
+
+    vpc-cni    = {
+      most_recent = true
+    }
+
+    kube-proxy = {
+      most_recent = true
+    }
+    
   }
 
   # Enable Fargate logging
