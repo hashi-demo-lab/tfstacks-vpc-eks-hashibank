@@ -71,7 +71,6 @@ component "k8s-addons" {
     cluster_version = component.eks.cluster_version
     oidc_provider_arn = component.eks.oidc_provider_arn
     cluster_certificate_authority_data = component.eks.cluster_certificate_authority_data
-    oidc_binding_id = component.k8s-rbac.oidc_binding_id
   }
 
   providers = {
