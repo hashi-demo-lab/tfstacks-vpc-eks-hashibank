@@ -22,3 +22,8 @@ variable "oidc_provider_arn" {
 variable "cluster_certificate_authority_data" {
   type    = string
 }
+
+variable "oidc_binding_id" {
+  type    = string
+  description = "used for component dependency"
+}
