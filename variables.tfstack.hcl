@@ -2,12 +2,14 @@ variable "regions" {
   type = string
 }
 
-variable "aws_identity_token_file" {
+variable "aws_identity_token" {
   type = string
+  ephemeral = true
 }
 
-variable "k8s_identity_token_file" {
+variable "k8s_identity_token" {
   type = string
+  ephemeral = true
 }
 
 variable "workload_idp_name" {

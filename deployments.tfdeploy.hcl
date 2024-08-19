@@ -9,7 +9,7 @@ identity_token "k8s" {
 
 deployment "development" {
   inputs = {
-    aws_identity_token_file = identity_token.aws.jwt_filename
+    aws_identity_token = identity_token.aws.jwt
     role_arn            = "arn:aws:iam::855831148133:role/tfstacks-role"
     regions             = "ap-southeast-2"
     vpc_name = "eks-vpc-3"
@@ -27,7 +27,7 @@ deployment "development" {
     eks_clusteradmin_username = "aws_simon.lynch_test-developer"
 
     #K8S
-    k8s_identity_token_file = identity_token.k8s.jwt_filename
+    k8s_identity_token = identity_token.k8s.jwt_filename
     namespace = "hashibank"
 
   }
@@ -35,7 +35,7 @@ deployment "development" {
 
 deployment "prod" {
   inputs = {
-    aws_identity_token_file = identity_token.aws.jwt_filename
+    aws_identity_token = identity_token.aws.jwt
     role_arn            = "arn:aws:iam::855831148133:role/tfstacks-role"
     regions             = "ap-southeast-2"
     vpc_name = "eks-vpc-prod"
@@ -53,7 +53,7 @@ deployment "prod" {
     eks_clusteradmin_username = "aws_simon.lynch_test-developer"
 
     #K8S
-    k8s_identity_token_file = identity_token.k8s.jwt_filename
+    k8s_identity_token = identity_token.k8s.jwt
     namespace = "hashibank"
 
   }
