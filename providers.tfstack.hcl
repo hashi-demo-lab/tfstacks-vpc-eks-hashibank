@@ -44,7 +44,7 @@ provider "aws" "configurations" {
 
     assume_role_with_web_identity {
       role_arn                = var.role_arn
-      web_identity_token_file = var.aws_identity_token
+      web_identity_token = var.aws_identity_token
     }
   }
 }
