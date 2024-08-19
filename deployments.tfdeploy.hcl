@@ -27,7 +27,7 @@ deployment "development" {
     eks_clusteradmin_username = "aws_simon.lynch_test-developer"
 
     #K8S
-    k8s_identity_token = identity_token.k8s.jwt_filename
+    k8s_identity_token = identity_token.k8s.jwt
     namespace = "hashibank"
 
   }
