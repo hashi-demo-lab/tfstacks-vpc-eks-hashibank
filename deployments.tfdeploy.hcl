@@ -62,8 +62,10 @@ deployment "prod" {
 
 orchestrate "auto_approve" "dev" {
   check {
-    # Only auto-approve in the development environment if no resoueces are being removed
-    condition = context.plan.changes.remove == 0 && context.plan.deployment == "development"
-    reason = "No resources are being removed in Development"
+    assert {
+      # Only auto-approve in the development environment if no resoueces are being removed
+      condition = context.plan.changes.remove == 0 && context.plan.deployment == "development"
+      reason = "No resources are being removed in Development"
+    }
   }
 }
