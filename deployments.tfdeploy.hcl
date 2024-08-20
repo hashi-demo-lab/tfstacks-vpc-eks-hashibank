@@ -67,7 +67,3 @@ orchestrate "auto_approve" "dev" {
     reason = "No resources are being removed in Development"
   }
 }
-
-
-
-    
