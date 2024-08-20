@@ -58,3 +58,15 @@ deployment "prod" {
 
   }
 }
+
+
+orchestrate "auto_approve" "dev" {
+  check {
+    # Check that the Development has no resources removed
+    condition = context.plan.changes["remove"].total == 0 && context.plan.deployment == "development"
+    reason = "Approve Developement no removal of resources"
+  }
+}
+
+
+  
