@@ -1,6 +1,6 @@
 #AWS VPC
 component "vpc" {
-  #for_each = var.regions
+  for_each = var.regions
 
   source = "./aws-vpc"
 
@@ -10,19 +10,19 @@ component "vpc" {
   }
 
   providers = {
-    aws     = provider.aws.configurations
+    aws     = provider.aws.configurations[each.value]
   }
 } 
 
 #AWS EKS
 component "eks" {
-  #for_each = var.regions
+  for_each = var.regions
 
   source = "./aws-eks-fargate"
 
   inputs = {
-    vpc_id = component.vpc.vpc_id
-    private_subnets = component.vpc.private_subnets
+    vpc_id = component.vpc[each.value].vpc_id
+    private_subnets = component.vpc[each.value].private_subnets
     kubernetes_version = var.kubernetes_version
     cluster_name = var.cluster_name
     tfc_hostname = var.tfc_hostname
@@ -32,7 +32,7 @@ component "eks" {
   }
 
   providers = {
-    aws    = provider.aws.configurations
+    aws    = provider.aws.configurations[each.value]
     cloudinit = provider.cloudinit.this
     kubernetes  = provider.kubernetes.this
     time = provider.time.this
@@ -42,74 +42,74 @@ component "eks" {
 
 # Update K8s role-binding
 component "k8s-rbac" {
-  #for_each = var.regions
+  for_each = var.regions
 
   source = "./k8s-rbac"
 
   inputs = {
-    cluster_endpoint = component.eks.cluster_endpoint
+    cluster_endpoint = component.eks[each.value].cluster_endpoint
     tfc_organization_name = var.tfc_organization_name
   }
 
   providers = {
-    kubernetes  = provider.kubernetes.configurations
+    kubernetes  = provider.kubernetes.configurations[each.value]
   }
 }
 
 
 # K8s Addons - aws load balancer controller, coredns, vpc-cni, kube-proxy
 component "k8s-addons" {
-  #for_each = var.regions
+  for_each = var.regions
 
   source = "./aws-eks-addon"
 
   inputs = {
     cluster_name = component.eks.cluster_name
-    vpc_id = component.vpc.vpc_id
-    private_subnets = component.vpc.private_subnets
-    cluster_endpoint = component.eks.cluster_endpoint
-    cluster_version = component.eks.cluster_version
-    oidc_provider_arn = component.eks.oidc_provider_arn
-    cluster_certificate_authority_data = component.eks.cluster_certificate_authority_data
-    oidc_binding_id = component.k8s-rbac.oidc_binding_id
+    vpc_id = component.vpc[each.value].vpc_id
+    private_subnets = component.vpc[each.value].private_subnets
+    cluster_endpoint = component.eks[each.value].cluster_endpoint
+    cluster_version = component.eks[each.value].cluster_version
+    oidc_provider_arn = component.eks[each.value].oidc_provider_arn
+    cluster_certificate_authority_data = component.eks[each.value].cluster_certificate_authority_data
+    oidc_binding_id = component.k8s-rbac[each.value].oidc_binding_id
   }
 
   providers = {
-    kubernetes  = provider.kubernetes.oidc_configurations
-    helm  = provider.helm.oidc_configurations
-    aws    = provider.aws.configurations
+    kubernetes  = provider.kubernetes.oidc_configurations[each.value]
+    helm  = provider.helm.oidc_configurations[each.value]
+    aws    = provider.aws.configurations[each.value]
     time = provider.time.this
   }
 }
 
 # Namespace
 component "k8s-namespace" {
-  #for_each = var.regions
+  for_each = var.regions
 
   source = "./k8s-namespace"
 
   inputs = {
     namespace = var.namespace
-    labels = component.k8s-addons.eks_addons
+    labels = component.k8s-addons[each.value].eks_addons
   }
 
   providers = {
-    kubernetes  = provider.kubernetes.oidc_configurations
+    kubernetes  = provider.kubernetes.oidc_configurations[each.value]
   }
 }
 
 # Deploy Hashibank
 component "deploy-hashibank" {
-  #for_each = var.regions
+  for_each = var.regions
 
   source = "./hashibank-deploy"
 
   inputs = {
-    hashibank_namespace = component.k8s-namespace.namespace
+    hashibank_namespace = component.k8s-namespace[each.value].namespace
   }
 
   providers = {
-    kubernetes  = provider.kubernetes.oidc_configurations
+    kubernetes  = provider.kubernetes.oidc_configurations[each.value]
     time = provider.time.this
   }
 }

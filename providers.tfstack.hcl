@@ -37,7 +37,7 @@ required_providers {
 }
 
 provider "aws" "configurations" {
-  #for_each = var.regions
+  for_each = var.regions
 
   config {
     region = var.regions
@@ -52,29 +52,29 @@ provider "aws" "configurations" {
 
 
 provider "kubernetes" "configurations" {
-  #for_each = var.regions
+  for_each = var.regions
   config { 
-    host                   = component.eks.cluster_endpoint
-    cluster_ca_certificate = base64decode(component.eks.cluster_certificate_authority_data)
-    token   = component.eks.eks_token
+    host                   = component.eks[each.value].cluster_endpoint
+    cluster_ca_certificate = base64decode(component.eks[each.value].cluster_certificate_authority_data)
+    token   = component.eks[each.value].eks_token
   }
 }
 
 provider "kubernetes" "oidc_configurations" {
-  #for_each = var.regions
+  for_each = var.regions
   config { 
-    host                   = component.eks.cluster_endpoint
-    cluster_ca_certificate = base64decode(component.eks.cluster_certificate_authority_data)
+    host                   = component.eks[each.value].cluster_endpoint
+    cluster_ca_certificate = base64decode(component.eks[each.value].cluster_certificate_authority_data)
     token   = var.k8s_identity_token
   }
 }
 
 provider "helm" "oidc_configurations" {
-  #for_each = var.regions
+  for_each = var.regions
   config {
     kubernetes {
-      host                   = component.eks.cluster_endpoint
-      cluster_ca_certificate = base64decode(component.eks.cluster_certificate_authority_data)
+      host                   = component.eks[each.value].cluster_endpoint
+      cluster_ca_certificate = base64decode(component.eks[each.value].cluster_certificate_authority_data)
       token   = var.k8s_identity_token
     }
   }

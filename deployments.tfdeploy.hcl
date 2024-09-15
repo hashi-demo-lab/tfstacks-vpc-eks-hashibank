@@ -11,7 +11,7 @@ deployment "development" {
   inputs = {
     aws_identity_token = identity_token.aws.jwt
     role_arn            = "arn:aws:iam::855831148133:role/tfstacks-role"
-    regions             = "ap-southeast-2"
+    regions             = ["ap-southeast-2"]
     vpc_name = "vpc-dev1"
     vpc_cidr = "10.0.0.0/16"
 
@@ -37,7 +37,7 @@ deployment "prod" {
   inputs = {
     aws_identity_token = identity_token.aws.jwt
     role_arn            = "arn:aws:iam::855831148133:role/tfstacks-role"
-    regions             = "ap-southeast-2"
+    regions             = ["ap-southeast-2"]
     vpc_name = "vpc-prod1"
     vpc_cidr = "10.20.0.0/16"
 
