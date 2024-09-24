@@ -56,7 +56,6 @@ provider "kubernetes" "configurations" {
   config { 
     host                   = component.eks[each.value].cluster_endpoint
     cluster_ca_certificate = base64decode(component.eks[each.value].cluster_certificate_authority_data)
-    # this ternary is to ensure destroy is correctly handled if eks_token is only used for initial bootstrap then OIDC is preferred
     token   = component.eks[each.value].eks_token
   }
 }
