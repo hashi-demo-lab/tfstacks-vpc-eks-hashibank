@@ -5,13 +5,13 @@ variable "regions" {
 variable "aws_identity_token" {
   type = string
   ephemeral = true
-  sensitive = true
+  #sensitive = true
 }
 
 variable "k8s_identity_token" {
   type = string
   ephemeral = true
-  sensitive = true
+  #sensitive = true
 }
 
 variable "workload_idp_name" {
