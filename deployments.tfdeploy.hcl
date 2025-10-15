@@ -1,5 +1,5 @@
 identity_token "aws" {
-  audience = ["aws.workload.identity"]
+  audience = ["terraform-stacks-private-preview"]
 }
 
 
