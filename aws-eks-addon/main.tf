@@ -6,7 +6,7 @@ locals {
 
 module "eks_blueprints_addons" {
   source  = "aws-ia/eks-blueprints-addons/aws"
-  version = "1.1"
+  version = "~> 1.1"
 
   cluster_name          = var.cluster_name
   cluster_endpoint      = var.cluster_endpoint
@@ -20,7 +20,7 @@ module "eks_blueprints_addons" {
   # EKS Add-ons
   eks_addons = {
     coredns = {
-      addon_version = "v1.11.1-eksbuild.9"
+      addon_version = "v1.11.4-eksbuild.14"
       configuration_values = jsonencode({
         computeType = "Fargate"
         # Ensure that the we fully utilize the minimum amount of resources that are supplied by
@@ -29,6 +29,7 @@ module "eks_blueprints_addons" {
         # components (kubelet, kube-proxy, and containerd). Fargate rounds up to the following
         # compute configuration that most closely matches the sum of vCPU and memory requests in
         # order to ensure pods always have the resources that they need to run.
+        replicaCount = 1
         resources = {
           limits = {
             cpu = "0.25"
@@ -53,11 +54,11 @@ module "eks_blueprints_addons" {
     }
 
     vpc-cni    = {
-      addon_version = "v1.18.3-eksbuild.1"
+      #addon_version = "v1.18.3-eksbuild.1"
     }
 
     kube-proxy = {
-      addon_version = "v1.30.0-eksbuild.3"
+      #addon_version = "v1.30.0-eksbuild.3"
     }
     
   }
