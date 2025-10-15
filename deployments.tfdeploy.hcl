@@ -37,6 +37,12 @@ deployment "development" {
   }
 }
 
+#add for GA version
+# GA: gate/approval lives on a deployment_group + auto-approve check
+#deployment_group "dev" {
+#  auto_approve_checks = [deployment_auto_approve.no_destroy_dev]
+#}
+
 # deployment "prod" {
 #   inputs = {
 #     aws_identity_token = identity_token.aws.jwt
