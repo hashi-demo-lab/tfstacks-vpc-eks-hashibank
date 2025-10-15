@@ -1,7 +1,8 @@
 required_providers {
   aws = {
     source  = "hashicorp/aws"
-    version = "~> 5.0"
+    #version = "~> 5.0"
+    version = "5.96.0"
   }
 
   cloudinit = {
@@ -38,6 +39,7 @@ required_providers {
     source = "hashicorp/random"
     version = "~> 3.7.0"
   }
+
 
 }
 
