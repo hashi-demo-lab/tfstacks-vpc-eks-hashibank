@@ -12,7 +12,7 @@ identity_token "k8s" {
 deployment "development" {
   inputs = {
     aws_identity_token = identity_token.aws.jwt
-    role_arn            = "arn:aws:iam::855831148133:role/tfstacks-role"
+    role_arn            = "arn:aws:iam::258850230659:role/tfstacks-role"
     regions             = ["ap-southeast-2"]
     vpc_name = "vpc-dev2"
     vpc_cidr = "10.0.0.0/16"
@@ -25,8 +25,8 @@ deployment "development" {
     tfc_kubernetes_audience = "k8s.workload.identity"
     tfc_hostname = "https://app.terraform.io"
     tfc_organization_name = "hashi-demos-apj"
-    eks_clusteradmin_arn = "arn:aws:iam::855831148133:role/aws_simon.lynch_test-developer"
-    eks_clusteradmin_username = "aws_simon.lynch_test-developer"
+    eks_clusteradmin_arn = "arn:aws:iam::258850230659:role/aws_aaron.evans_test-developer"
+    eks_clusteradmin_username = "aws_aaron.evans_test-developer"
 
     #K8S
     k8s_identity_token = identity_token.k8s.jwt
