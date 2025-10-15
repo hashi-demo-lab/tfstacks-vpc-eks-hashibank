@@ -32,6 +32,8 @@ deployment "development" {
     k8s_identity_token = identity_token.k8s.jwt
     namespace = "hashibank"
 
+    # flip this on only when you intend to destroy
+    #destroy = true
   }
 }
 
