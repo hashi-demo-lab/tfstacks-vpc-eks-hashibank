@@ -63,7 +63,7 @@ resource "time_sleep" "wait_60_seconds" {
 #hashibank ingress
 resource "kubernetes_ingress_v1" "hashibank" {
   depends_on = [time_sleep.wait_60_seconds]
-  wait_for_load_balancer = false
+  wait_for_load_balancer = true
   metadata {
     name        = "hashibank"
     namespace = var.hashibank_namespace

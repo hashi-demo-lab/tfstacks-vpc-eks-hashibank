@@ -27,3 +27,7 @@ variable "oidc_binding_id" {
   type    = string
   description = "used for component dependency"
 }
+
+variable "private_subnets" {
+  type = list(string)
+}
