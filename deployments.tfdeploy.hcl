@@ -2,11 +2,9 @@ identity_token "aws" {
   audience = ["terraform-stacks-private-preview"]
 }
 
-
 identity_token "k8s" {
   audience = ["aws.workload.identity"]
 }
-
 
 deployment "development" {
   inputs = {
@@ -33,36 +31,36 @@ deployment "development" {
 
   }
   # flip this on only when you intend to destroy
-  destroy = true
+  # destroy = true
 }
 
-deployment "prod" {
-  inputs = {
-    aws_identity_token = identity_token.aws.jwt
-    role_arn            = "arn:aws:iam::258850230659:role/tfstacks-role"
-    regions             = ["us-east-1"]
-    vpc_name = "vpc-aarone-prod1"
-    vpc_cidr = "10.20.0.0/16"
+# deployment "prod" {
+#   inputs = {
+#     aws_identity_token = identity_token.aws.jwt
+#     role_arn            = "arn:aws:iam::258850230659:role/tfstacks-role"
+#     regions             = ["us-east-1"]
+#     vpc_name = "vpc-aarone-prod1"
+#     vpc_cidr = "10.20.0.0/16"
 
-    #EKS Cluster
-    kubernetes_version = "1.33"
-    cluster_name = "eks-aarone-prod01"
+#     #EKS Cluster
+#     kubernetes_version = "1.33"
+#     cluster_name = "eks-aarone-prod01"
     
-    #EKS OIDC
-    tfc_kubernetes_audience = "aws.workload.identity"
-    tfc_hostname = "https://app.terraform.io"
-    tfc_organization_name = "hashi-demos-apj"
-    eks_clusteradmin_arn = "arn:aws:iam::258850230659:role/aws_aaron.evans_test-developer"
-    eks_clusteradmin_username = "aws_aaron.evans_test-developer"
+#     #EKS OIDC
+#     tfc_kubernetes_audience = "aws.workload.identity"
+#     tfc_hostname = "https://app.terraform.io"
+#     tfc_organization_name = "hashi-demos-apj"
+#     eks_clusteradmin_arn = "arn:aws:iam::258850230659:role/aws_aaron.evans_test-developer"
+#     eks_clusteradmin_username = "aws_aaron.evans_test-developer"
 
-    #K8S
-    k8s_identity_token = identity_token.k8s.jwt
-    namespace = "hashibank"
+#     #K8S
+#     k8s_identity_token = identity_token.k8s.jwt
+#     namespace = "hashibank"
 
-  }
-  # flip this on only when you intend to destroy
-  destroy = true
-}
+#   }
+#   # flip this on only when you intend to destroy
+#   # destroy = true
+# }
 
 #comment out as this for Beta version 
 #orchestrate "auto_approve" "safe_plans_dev" {
