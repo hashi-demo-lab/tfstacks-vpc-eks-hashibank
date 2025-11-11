@@ -31,7 +31,7 @@ deployment "development" {
 
   }
   # flip this on only when you intend to destroy
-  # destroy = true
+  destroy = true
 }
 
 # deployment "prod" {
